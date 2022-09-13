@@ -39,7 +39,7 @@ const User = () => {
                     </p>
                 </div>
                 <div className={`${error ? 'hidden' : ''} flex flex-col dark:bg-slate-800 dark:text-white p-2 rounded-lg transition-all`}>
-                    {data ? data.length > 1 ? data.map((v: any) => (
+                    {data ? data.length > 0 ? data.map((v: any) => (
                         <div key={v.title} className='flex flex-col space-y-2 cursor-pointer w-auto h-min py-1 hover:rounded-lg px-2 hover:border hover:border-black dark:hover:border dark:hover:border-white dark:hover:rounded-lg dark:hover:border-solid transition-all'>
                             <p>{v.title}</p>
                             {v.role === 'user' ? '' :
