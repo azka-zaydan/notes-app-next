@@ -18,8 +18,6 @@ const User = () => {
         const localToken = localStorage.getItem('token')
         if (localToken) {
             setUserToken((localToken))
-        } else {
-            window.location.href = '/login'
         }
     }, [])
     const { user } = router.query
@@ -33,33 +31,36 @@ const User = () => {
 
             <Layout>
                 <div className='relative container w-max h-max m-auto p-4 rounded-lg flex flex-col dark:bg-slate-500 items-center justify-center text-center space-y-2 transition-all shadow-2xl drop-shadow-2xl'>
-                    <div>
-
-                        <p>
-                            Current User:
-                        </p>
-                        <p>
-                            {token === '' ? '' : user}
-                        </p>
+                    <div className={token ? 'flex space-x-2' : 'hidden'}>
+                        {token === '' ? null :
+                            <>
+                                <p>
+                                    Current User:
+                                </p>
+                                <p>
+                                    {user}
+                                </p>
+                            </>
+                        }
                     </div>
                     <div className={`${error ? 'hidden' : ''} flex flex-col dark:bg-slate-800 dark:text-white p-2 rounded-lg transition-all`}>
                         <div className='flex flex-col space-y-2 cursor-pointer w-auto h-[25rem] overflow-auto py-1 hover:rounded-lg px-2 hover:border hover:border-black dark:hover:border dark:hover:border-white dark:hover:rounded-lg dark:hover:border-solid transition-all'>
                             {data ? data.length > 0 ? data.map((v: any) => (
-                                <div key={v.title} className='justify-center items-center hover:rounded-lg px-2 hover:border hover:border-black dark:hover:border dark:hover:border-white dark:hover:rounded-lg dark:hover:border-solid transition-all'>
+                                <div key={v.title} className='relative flex flex-col justify-center items-center hover:rounded-lg px-2 hover:border hover:border-black dark:hover:border dark:hover:border-white dark:hover:rounded-lg dark:hover:border-solid transition-all'>
 
-                                    <p>{v.title}</p>
+                                    <p className='text-2xl'>{v.title}</p>
                                     {
                                         v.role === 'user' ? '' :
                                             <p>owner: {v.owner}</p>
                                     }
                                 </div>
-                            )) : 'No Notes' : (<p className={`${error ? 'hidden' : ''}`}>Loading...</p>)}
+                            )) : 'No Notes' : 'Loading...'}
                         </div>
 
                     </div>
                     {error ? (
                         <Link href={'/login'}>
-                            <button className='dark:hover:text-white'>Please Log-in</button>
+                            <button className='dark:hover:text-white pb-2'>Please Log-in</button>
                         </Link>
                     ) : ''}
                     {token === '' ? '' : (
