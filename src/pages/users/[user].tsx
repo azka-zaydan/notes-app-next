@@ -35,7 +35,7 @@ const User = () => {
                         Current User:
                     </p>
                     <p>
-                        {user}
+                        {token === '' ? '' : user}
                     </p>
                 </div>
                 <div className={`${error ? 'hidden' : ''} flex flex-col dark:bg-slate-800 dark:text-white p-2 rounded-lg transition-all`}>
