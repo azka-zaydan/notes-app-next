@@ -28,25 +28,29 @@ const User = () => {
 
     return (
         <Layout>
-            <div className='w-auto h-min p-4 rounded-lg flex flex-col dark:bg-slate-500 items-center justify-center text-center space-y-2 transition-all shadow-2xl drop-shadow-2xl'>
+            <div className='relative container w-max h-max m-auto p-4 rounded-lg flex flex-col dark:bg-slate-500 items-center justify-center text-center space-y-2 transition-all shadow-2xl drop-shadow-2xl'>
                 <div>
 
                     <p>
                         Current User:
                     </p>
                     <p>
-                        {userName}
+                        {user}
                     </p>
                 </div>
                 <div className={`${error ? 'hidden' : ''} flex flex-col dark:bg-slate-800 dark:text-white p-2 rounded-lg transition-all`}>
-                    {data ? data.length > 0 ? data.map((v: any) => (
-                        <div key={v.title} className='flex flex-col space-y-2 cursor-pointer w-auto h-min py-1 hover:rounded-lg px-2 hover:border hover:border-black dark:hover:border dark:hover:border-white dark:hover:rounded-lg dark:hover:border-solid transition-all'>
-                            <p>{v.title}</p>
-                            {v.role === 'user' ? '' :
-                                <p>owner: {v.owner}</p>
-                            }
-                        </div>
-                    )) : 'No Notes' : (<p className={`${error ? 'hidden' : ''}`}>Loading...</p>)}
+                    <div className='flex flex-col space-y-2 cursor-pointer w-auto h-[25rem] overflow-auto py-1 hover:rounded-lg px-2 hover:border hover:border-black dark:hover:border dark:hover:border-white dark:hover:rounded-lg dark:hover:border-solid transition-all'>
+                        {data ? data.length > 0 ? data.map((v: any) => (
+                            <div key={v.title} className='hover:rounded-lg px-2 hover:border hover:border-black dark:hover:border dark:hover:border-white dark:hover:rounded-lg dark:hover:border-solid transition-all'>
+
+                                <p>{v.title}</p>
+                                {
+                                    v.role === 'user' ? '' :
+                                        <p>owner: {v.owner}</p>
+                                }
+                            </div>
+                        )) : 'No Notes' : (<p className={`${error ? 'hidden' : ''}`}>Loading...</p>)}
+                    </div>
 
                 </div>
                 {error ? (
@@ -72,7 +76,7 @@ const User = () => {
                 )
                 }
             </div>
-        </Layout>
+        </Layout >
     )
 }
 
