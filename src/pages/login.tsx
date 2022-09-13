@@ -34,17 +34,16 @@ const Login: NextPage = () => {
                     <input type="text" ref={name} name='username' className='px-2 rounded-md' />
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" className='px-2 rounded-md' id="" ref={pass} />
-                    {name.current?.value === '' ?
+                    {userName === '' ?
                         <>
                             <p className='relative top-2'>
                                 Please Enter Your Credentials
                             </p>
                             <button onClick={handleClick} className='transition-all hover:bg-slate-300 w-auto flex p-2 rounded-lg'>Submit</button>
                         </> :
-                        name.current?.value === '' && pass.current?.value === '' ? 'Please Enter Your Credentials' :
-                            <Link href={`/logged-in`}>
-                                <button className='transition-all hover:bg-slate-300 w-auto flex p-2 rounded-lg'>Let's Go!</button>
-                            </Link>
+                        <Link href={`/logged-in`}>
+                            <button className='transition-all hover:bg-slate-300 w-auto flex p-2 rounded-lg'>Let's Go!</button>
+                        </Link>
                     }
                 </form>
 
