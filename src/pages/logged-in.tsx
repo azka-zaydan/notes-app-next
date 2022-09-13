@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import useSWR from 'swr'
+import Header from '../components/Header'
 import Layout from '../components/Layout'
 import { useCurrentUser } from '../context/CurrentUserContext'
 import { fetcher } from '../utils/fetcherAPI'
@@ -23,24 +24,28 @@ const LoggedIn = () => {
     }, [token])
 
     return (
-        <Layout>
-            <div className='flex flex-col w-auto h-min dark:bg-slate-500 p-4 rounded-lg text-center transition-all shadow-2xl drop-shadow-2xl'>
-                {data ? (
-                    <>
-                        <p>Your In!!</p>
-                        <Link href={`/users/${userName}`}>
-                            <button className='dark:hover:text-white'>Visit Your Profile!</button>
+        <>
+            <Header title={'Logged-in'} />
+
+            <Layout>
+                <div className='flex flex-col w-auto h-min dark:bg-slate-500 p-4 rounded-lg text-center transition-all shadow-2xl drop-shadow-2xl'>
+                    {data ? (
+                        <>
+                            <p>Your In!!</p>
+                            <Link href={`/users/${userName}`}>
+                                <button className='dark:hover:text-white'>Visit Your Profile!</button>
+                            </Link>
+                        </>
+
+                    ) : error ? (
+                        <Link href={'/login'}>
+                            <button>Please Retry</button>
                         </Link>
-                    </>
+                    ) : 'Loading...'}
 
-                ) : error ? (
-                    <Link href={'/login'}>
-                        <button>Please Retry</button>
-                    </Link>
-                ) : 'Loading...'}
-
-            </div>
-        </Layout>
+                </div>
+            </Layout>
+        </>
     )
 }
 
