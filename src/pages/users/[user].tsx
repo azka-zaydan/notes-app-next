@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 const User = () => {
     const router = useRouter()
-    const { token, setUserToken, logOut } = useCurrentUser()
+    const { token, setUserToken, logOut, userName } = useCurrentUser()
 
     useEffect(() => {
         const localToken = localStorage.getItem('token')
@@ -28,35 +28,47 @@ const User = () => {
 
     return (
         <Layout>
-            <div className='w-auto h-min p-4 rounded-lg flex flex-col bg-slate-500 items-center justify-center text-center space-y-2 transition-all shadow-2xl drop-shadow-2xl'>
+            <div className='w-auto h-min p-4 rounded-lg flex flex-col dark:bg-slate-500 items-center justify-center text-center space-y-2 transition-all shadow-2xl drop-shadow-2xl'>
                 <div>
 
                     <p>
                         Current User:
                     </p>
                     <p>
-                        {user}
+                        {userName}
                     </p>
                 </div>
-                <div className={`${error ? 'hidden' : ''} flex flex-col bg-slate-800 text-white p-2 rounded-lg transition-all`}>
+                <div className={`${error ? 'hidden' : ''} flex flex-col dark:bg-slate-800 dark:text-white p-2 rounded-lg transition-all`}>
                     {data ? data.length > 1 ? data.map((v: any) => (
-                        <div key={v.title} className='w-auto h-min py-1 px-2 hover:border hover:border-white hover:rounded-lg hover:border-solid transition-all'>
+                        <div key={v.title} className='flex flex-col space-y-2 cursor-pointer w-auto h-min py-1 hover:rounded-lg px-2 hover:border hover:border-black dark:hover:border dark:hover:border-white dark:hover:rounded-lg dark:hover:border-solid transition-all'>
                             <p>{v.title}</p>
+                            {v.role === 'user' ? '' :
+                                <p>owner: {v.owner}</p>
+                            }
                         </div>
                     )) : 'No Notes' : (<p className={`${error ? 'hidden' : ''}`}>Loading...</p>)}
 
                 </div>
                 {error ? (
                     <Link href={'/login'}>
-                        <button className='hover:text-white'>Please Log-in</button>
+                        <button className='dark:hover:text-white'>Please Log-in</button>
                     </Link>
                 ) : ''}
                 {token === '' ? '' : (
-                    <button onClick={() => logOut()} >
-                        <div className='py-2 bg-slate-800 rounded-lg text-white w-auto px-4 hover:border hover:border-white transition-all'>
-                            Log Out
-                        </div>
-                    </button>
+                    <div className='flex space-x-2'>
+                        <button onClick={() => logOut()} >
+                            <div className='py-2 dark:bg-slate-800 rounded-lg dark:text-white w-auto px-4 dark:hover:border dark:hover:border-white transition-all'>
+                                Log Out
+                            </div>
+                        </button>
+                        <Link href={'/'}>
+                            <button>
+                                <div className='py-2 dark:bg-slate-800 rounded-lg dark:text-white w-auto px-4 dark:hover:border dark:hover:border-white transition-all'>
+                                    Home
+                                </div>
+                            </button>
+                        </Link>
+                    </div>
                 )
                 }
             </div>

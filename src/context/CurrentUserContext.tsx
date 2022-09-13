@@ -8,6 +8,7 @@ type UserContextType = {
     userName: string
     userPassword: string
     logIn: (userName: string, userPassword: string) => void
+    setUserNameLocal: (username: string) => void
     logOut: () => void
     token: string
     setUserToken: (token: string) => void
@@ -38,6 +39,9 @@ const CurrentUserContextProvider = ({ children }: Props) => {
         setToken('')
         window.localStorage.clear()
     }
+    const setUserNameLocal = (username: string) => [
+        setUserName(username)
+    ]
 
     return (
         <currentUserContext.Provider value={{
@@ -46,7 +50,8 @@ const CurrentUserContextProvider = ({ children }: Props) => {
             token,
             logIn,
             logOut,
-            setUserToken
+            setUserToken,
+            setUserNameLocal
         }}>
             {children}
         </currentUserContext.Provider>
