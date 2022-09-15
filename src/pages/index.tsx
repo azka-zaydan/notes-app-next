@@ -7,14 +7,19 @@ import Layout from "../components/Layout";
 import { useCurrentUser } from "../context/CurrentUserContext";
 
 const Home: NextPage = () => {
-  const { userName, setUserNameLocal } = useCurrentUser()
+  const { userName, setUserNameLocal, token, logOut, setUserToken } = useCurrentUser()
 
   useEffect(() => {
     const username = window.localStorage.getItem('username')
+    const localToken = window.localStorage.getItem('token')
     if (username !== null || username) {
       setUserNameLocal((username).replace('"', '').replace('"', ''))
     }
-  })
+    if (localToken) {
+      setUserToken(localToken)
+    }
+    // setUserToken(String(window.localStorage.getItem('token')))
+  }, [])
 
   return (
     <>
@@ -25,7 +30,7 @@ const Home: NextPage = () => {
           {userName === '' || userName === 'null' ? (
             <div className="flex flex-col">
               <Link href={'/login'}>
-                <button className="dark:hover:text-white transition-all">Please Log in</button>
+                <button className="py-2 dark:bg-slate-800 rounded-lg dark:text-white w-auto px-4 dark:hover:bg-slate-300 dark:hover:text-black transition-all">Log in</button>
               </Link>
 
             </div>
@@ -34,8 +39,13 @@ const Home: NextPage = () => {
               <p>Hello</p>
               <p>{userName.replace('"', '').replace('"', '')}</p>
               <Link href={`/users/${userName}`}>
-                <button className="dark:bg-slate-800 dark:text-white dark:hover:border dark:hover:border-white rounded-lg w-max p-2">My Notes</button>
+                <button className="py-2 dark:bg-slate-800 rounded-lg dark:text-white w-auto px-4 dark:hover:bg-slate-300 dark:hover:text-black transition-all">My Notes</button>
               </Link>
+              <button onClick={() => logOut()} >
+                <div className='py-2 dark:bg-slate-800 rounded-lg dark:text-white w-auto px-4 dark:hover:bg-slate-300 dark:hover:text-black transition-all'>
+                  Log Out
+                </div>
+              </button>
             </div>
           )}
         </div>

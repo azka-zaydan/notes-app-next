@@ -12,6 +12,9 @@ type UserContextType = {
     logOut: () => void
     token: string
     setUserToken: (token: string) => void
+    isEdit: boolean
+    setEditOpen: () => void
+    setEditClose: () => void
 }
 const currentUserContext = createContext({} as UserContextType)
 
@@ -23,7 +26,7 @@ const CurrentUserContextProvider = ({ children }: Props) => {
     const [token, setToken] = useState('')
     const [userName, setUserName] = useState('')
     const [userPassword, setUserPassword] = useState('')
-
+    const [isEdit, setIsEdit] = useState(false)
     const setUserToken = (token: string) => {
         setToken(token)
     }
@@ -42,6 +45,12 @@ const CurrentUserContextProvider = ({ children }: Props) => {
     const setUserNameLocal = (username: string) => [
         setUserName(username)
     ]
+    const setEditOpen = () => {
+        setIsEdit(true)
+    }
+    const setEditClose = () => {
+        setIsEdit(false)
+    }
 
     return (
         <currentUserContext.Provider value={{
@@ -51,7 +60,10 @@ const CurrentUserContextProvider = ({ children }: Props) => {
             logIn,
             logOut,
             setUserToken,
-            setUserNameLocal
+            setUserNameLocal,
+            isEdit,
+            setEditOpen,
+            setEditClose
         }}>
             {children}
         </currentUserContext.Provider>

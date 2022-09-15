@@ -25,7 +25,7 @@ const LoggedIn = () => {
 
     return (
         <>
-            <Header title={'Logged-in'} />
+            <Header title={`${error ? 'Error' : 'Logging in...'}`} />
 
             <Layout>
                 <div className='flex flex-col w-auto h-min dark:bg-slate-500 p-4 rounded-lg text-center transition-all shadow-2xl drop-shadow-2xl'>
@@ -39,7 +39,7 @@ const LoggedIn = () => {
 
                     ) : error ? (
                         <Link href={'/login'}>
-                            <button>Please Retry</button>
+                            <button className='py-2 dark:bg-slate-800 rounded-lg dark:text-white w-auto px-4 dark:hover:bg-slate-300 dark:hover:text-black transition-all'>Please Retry</button>
                         </Link>
                     ) : 'Loading...'}
 

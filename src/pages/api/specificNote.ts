@@ -5,12 +5,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { token } = req.query;
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
+  const { token, title } = req.query;
+
   const data = await axios
-    .get("https://fastapi-mongo-azka.up.railway.app/notes", {
+    .get(`https://fastapi-mongo-azka.up.railway.app/notes?title=` + title, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -18,5 +16,6 @@ export default async function handler(
     .then((res) => {
       return res.data;
     });
+  console.log(res);
   res.send(data);
 }

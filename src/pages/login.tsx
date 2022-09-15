@@ -26,7 +26,6 @@ const Login: NextPage = () => {
         }
     }, [])
 
-    // console.log(name.current?.value === '')
 
     return (
         <>
