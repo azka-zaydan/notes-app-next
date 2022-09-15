@@ -20,7 +20,6 @@ const Home: NextPage = () => {
     }
     // setUserToken(String(window.localStorage.getItem('token')))
   }, [])
-
   return (
     <>
       <Header title={'Home'} />
