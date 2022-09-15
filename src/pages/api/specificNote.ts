@@ -9,7 +9,7 @@ export default async function handler(
 ) {
   const { token, title } = req.query;
   const data: Note[] = await axios
-    .get(`http://127.0.0.1:8000/notes`, {
+    .get(`https://fastapi-mongo-azka.up.railway.app/notes`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

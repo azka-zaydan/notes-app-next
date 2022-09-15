@@ -39,7 +39,7 @@ const Note = () => {
                             ) : v.description}</p>
                         </div>
                     )) : <p>Loading...</p>}
-                    <button onClick={() => router.back()}>Go Back</button>
+                    <button onClick={() => router.back()} className='py-2 dark:bg-slate-800 rounded-lg dark:text-white w-auto px-4 dark:hover:bg-slate-300 dark:hover:text-black transition-all'>Go Back</button>
                 </div>
             </Layout>
         </>
