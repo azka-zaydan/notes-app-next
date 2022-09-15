@@ -46,8 +46,9 @@ const User = () => {
                         <div className='flex flex-col space-y-2 cursor-pointer container h-[25rem] overflow-auto py-1 hover:rounded-lg px-2 hover:border hover:border-black dark:hover:border dark:hover:border-white dark:hover:rounded-lg dark:hover:border-solid transition-all'>
                             {data ? data.length > 0 ? (data.map((v: any) => (
                                 <div key={v.title} className='flex w-auto flex-col justify-center items-center px-2 dark:hover:border dark:hover:border-white dark:hover:rounded-lg transition-all'>
-                                    <p className='text-2xl'>{v.title}</p>
-
+                                    <Link href={`/users/${user}/notes/${v.title}`}>
+                                        <p className='text-2xl'>{v.title}</p>
+                                    </Link>
                                     {
                                         v.role === 'user' ? '' :
                                             <p>owner: {v.owner}</p>
